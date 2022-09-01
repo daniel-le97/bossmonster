@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.0-beta1 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body.debug .container,
+    body.debug .container-fluid {
+      outline: 2px double blue;
+      outline-offset: -2px;
+    }
+
+    body.debug .row {
+      outline: 2px dashed red;
+      outline-offset: -2px;
+    }
+
+    body.debug [class*="col-"] {
+      outline: 2px dotted forestgreen;
+      outline-offset: -3px;
+    }
+  </style>
+</head>
+
+<body class="desbug">
+  <main class="container">
+    <div class="row m-5 heros" id="heros">
+      <!-- Heros -->
+
+    </div>
+    <div class="row">
+      <!-- Monster -->
+      <div class="col-8" id="monster">
+        <h1>MonStars! Health: <h1 id="bosshealth"></h1>
+
+        </h1>
+        <img id="monsterimg" class="img-fluid rounded" onclick="monsterDamage()"
+          src="https://www.throwbacks.com/content/images/2018/04/Nerdlucks-1200.jpg" alt="">
+      </div>
+      <!-- Buy -->
+      <div class="col-4 border border-5 border-danger" id="buy">
+        <div>
+          <h3>Current Gold:</h3>
+          <h1 class="text-success" id="gold">0</h1>
+        </div>
+        <div>
+          <h1>Buy:</h1>
+          <h4> <button> Potion 5</button></h4>
+          <h4 class="btn btn-primary" onclick="getHelp('Daffy')">Donald Duck 10</h4>
+          <h4 class="btn btn-primary" onclick="getHelp('Lola')">Lola Bunny 10</h4>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+    integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
+    </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+    integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous">
+    </script>
+  <script src="app.js"></script>
+</body>
+
+</html>
