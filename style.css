@@ -1,4 +1,4 @@
-.scard-size {
+.card-size {
   max-width: 10rem;
   max-height: 10rem;
 }
@@ -6,4 +6,14 @@
 .img-height {
   max-height: 7rem;
   max-width: 6rem;
+}
+
+.back {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.hidden {
+  display: none;
 }

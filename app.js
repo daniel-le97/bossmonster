@@ -1,43 +1,42 @@
-let gold = 0
+let gold = 0;
 const heroes = [
   {
-    name: 'Taz',
-    type: 'devil',
+    name: "Taz",
+    type: "devil",
     damage: 1,
     health: 100,
-    img: 'png-transparent-space-jam-2-thumbnail.png',
-    lvl: 1
+    img: "png-transparent-space-jam-2-thumbnail.png",
+    lvl: 1,
   },
   {
-    name: 'Daffy',
-    type: 'duck',
-    damage: 2,
+    name: "Daffy",
+    type: "duck",
+    damage: 1,
     health: 50,
-    img: 'https://secure.img1-fg.wfcdn.com/im/55789700/compr-r85/1539/153915178/daffy-duck-cardboard-standup.jpg',
-    lvl: 0
+    img: "https://secure.img1-fg.wfcdn.com/im/55789700/compr-r85/1539/153915178/daffy-duck-cardboard-standup.jpg",
+    lvl: 0,
   },
   {
-    name: 'Lola',
-    type: 'bunny',
-    damage: 5,
+    name: "Lola",
+    type: "bunny",
+    damage: 1,
     health: 50,
-    img: 'Image.png',
-    lvl: 0
-  }
-]
-
+    img: "/win_taunt_3_by_armentis_davncca.gif",
+    lvl: 0,
+  },
+];
 
 const boss = {
   health: 100,
   maxHealth: 100,
-  damage: 2,
-  level: 1
-}
+  damage: 1,
+  level: 1,
+};
 
 function drawHeros() {
-  let character = document.getElementById('heros')
-  let template = ''
-  heroes.forEach(hero => {
+  let character = document.getElementById("heros");
+  let template = "";
+  heroes.forEach((hero) => {
     // console.log(hero);
     if (hero.lvl >= 1) {
       template += `
@@ -53,121 +52,130 @@ function drawHeros() {
       </div>
       </div>
       </div>
-      `
+      `;
     }
-  })
+  });
   // @ts-ignore
-  character.innerHTML = template
+  character.innerHTML = template;
 }
 
 function heroDamage() {
-  heroes.forEach(hero => {
+  heroes.forEach((hero) => {
     if (hero.lvl > 0) {
-
-      hero.health -= boss.damage
+      hero.health -= boss.damage;
       if (hero.health < 0) {
-        hero.health = 0
+        hero.health = 0;
       }
     }
-  })
-  drawHeros()
+  });
+  drawHeros();
 }
 function potion(name) {
-  let hero = heroes.find(hero => hero.name == name)
+  let hero = heroes.find((hero) => hero.name == name);
   // @ts-ignore
-  hero.health += 5
+  hero.health += 25;
   if (hero.health > 100) {
-    hero.health = 100
+    hero.health = 100;
   }
 
   if (gold < 5) {
-    return
+    return;
   }
 
+  gold -= 5;
 
+  let money = document.querySelector("#gold");
+  money.innerText = gold;
 
-  gold -= 5
-
-  let money = document.querySelector('#gold')
-  money.innerText = gold
-
-  drawHeros()
+  drawHeros();
 }
 
 function monsterDamage() {
-
-
-  heroes.forEach(hero => {
+  heroes.forEach((hero) => {
     if (hero.lvl > 0) {
       if (hero.health > 0) {
-
-        boss.health -= hero.damage
+        boss.health -= hero.damage;
         // @ts-ignore
         console.log(boss.health);
-        goldOnHit()
+        goldOnHit();
       }
     }
-  })
-  bossHealth()
-  bossLevelUp()
-
+  });
+  bossHealth();
+  bossLevelUp();
 }
 function bossHealth() {
-  let bosshealth = document.querySelector('#bosshealth')
-  let template = ''
+  let bosshealth = document.querySelector("#bosshealth");
+  let template = "";
   template += `
     <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressBar"
             aria-label="Animated striped example" aria-valuenow="${boss.health}%" aria-valuemin="0" aria-valuemax="100"
             style="width: ${boss.health}%">
           </div>
-        </div>`
+        </div>`;
   // @ts-ignore
-  bosshealth.innerHTML = template
+  bosshealth.innerHTML = template;
 }
 function bossLevelUp() {
   if (boss.health <= 0) {
-    boss.level++
-    console.log('level', boss.level);
+    boss.level++;
+    heroes.forEach((hero) => {
+      hero.lvl++;
+      hero.damage += hero.damage * 1.1;
+      console.log(hero.damage);
+    });
+
+    console.log("level", boss.level);
 
     if (boss.level >= 1) {
-      boss.maxHealth += 150
-      boss.health = boss.maxHealth
+      boss.maxHealth += boss.maxHealth * 1.5;
+      boss.health = boss.maxHealth;
+      document.getElementById("levelId").innerText = boss.level;
       // @ts-ignore
-      document.getElementById('monsterimg').src = "https://sneakernews.com/wp-content/uploads/2015/07/monstars-2016.jpg"
+      document.getElementById("monsterimg").src =
+        "/goaliath___idle_by_porforever_d9t67jo.gif";
+      document.querySelector(".back").classList.remove("hidden");
+      if (!document.querySelector(".back").classList.contains("hidden")) {
+        alert("AHHHHH RUNNNNNN");
+      }
     }
-
   }
 }
 function goldOnHit() {
-  gold++
-  let money = document.querySelector('#gold')
+  gold++;
+  let money = document.querySelector("#gold");
   // @ts-ignore
-  money.innerText = gold
+  money.innerText = gold;
 
   // @ts-ignore
 }
 
 function getHelp(name) {
-  let help = heroes.find(hero => hero.name == name)
+  let help = heroes.find((hero) => hero.name == name);
   // @ts-ignore
   if (gold < 10) {
-    return
+    return;
   } else {
-    help.lvl++
+    help.lvl++;
   }
-  gold -= 10
-  let money = document.querySelector('#gold')
-  money.innerText = gold
+  gold -= 10;
+  let money = document.querySelector("#gold");
+  money.innerText = gold;
 
-  drawHeros()
+  drawHeros();
 }
 
+function getStronger() {
+  heroes.forEach((hero) => {
+    if (hero.health > 1) {
+      hero.damage += hero.damage * 5;
+    }
+  });
 
+  console.log("check");
+}
 
-
-
-
-bossHealth()
-setInterval(heroDamage, 500)
-drawHeros()
+bossHealth();
+setInterval(heroDamage, 500);
+drawHeros();
